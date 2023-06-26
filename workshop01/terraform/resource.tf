@@ -16,7 +16,7 @@ resource "docker_volume" "data-vol" {
 }
 
 resource "docker_container" "bgg-database" {
-  image = docker_image.bgg-backend.id
+  image = docker_image.bgg-backend.name
   name  = "${var.app_namespace}-bgg-database"
 
   networks_advanced {
@@ -36,7 +36,7 @@ resource "docker_container" "bgg-database" {
 
 resource "docker_container" "bgg-backend" {
   count = var.backend_instance_count
-  image = docker_image.bgg-backend.id
+  image = docker_image.bgg-backend.name
   name  = "${var.app_namespace}-bgg-backend-${count.index}"
 
   networks_advanced {
@@ -72,7 +72,7 @@ resource "digitalocean_droplet" "nginx" {
   region = var.do_region
   size   = var.do_size
 
-  ssh_keys = [data.digitalocean_ssh_key.aipc]
+  ssh_keys = [data.digitalocean_ssh_key.aipc.id]
 
   connection {
     type = "ssh"

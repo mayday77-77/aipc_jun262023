@@ -27,7 +27,7 @@ variable "do_image" {
 }
 
 variable "do_size" {
-  default = "s-lvcpu-512mb-10gb"
+  default = "s-1vcpu-512mb-10gb"
 }
 
 variable "do_ssh_key" {
@@ -35,4 +35,5 @@ variable "do_ssh_key" {
 }
 
 variable "ssh_private_key" {
+  default = "/home/fred/.ssh/id_rsa"
 }
