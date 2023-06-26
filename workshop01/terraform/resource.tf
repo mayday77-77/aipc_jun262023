@@ -16,7 +16,7 @@ resource "docker_volume" "data-vol" {
 }
 
 resource "docker_container" "bgg-database" {
-  image = docker_image.bgg-backend.name
+  image = docker_image.bgg-database.image_id
   name  = "${var.app_namespace}-bgg-database"
 
   networks_advanced {
@@ -36,7 +36,7 @@ resource "docker_container" "bgg-database" {
 
 resource "docker_container" "bgg-backend" {
   count = var.backend_instance_count
-  image = docker_image.bgg-backend.name
+  image = docker_image.bgg-backend.image_id
   name  = "${var.app_namespace}-bgg-backend-${count.index}"
 
   networks_advanced {
