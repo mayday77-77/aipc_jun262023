@@ -34,6 +34,5 @@ variable "do_ssh_key" {
   default = "aipc"
 }
 
-#variable "ssh_private_key" {
-
-#}
+variable "ssh_private_key" {
+}
