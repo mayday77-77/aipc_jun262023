@@ -9,7 +9,7 @@ resource "digitalocean_droplet" "codeserver" {
   region = var.do_region
   size   = var.do_size
 
-  ssh_keys = [data.digitalocean_ssh_key.aipc]
+  ssh_keys = [data.digitalocean_ssh_key.aipc.id]
 }
 
 resource "local_file" "root_at_codeserver" {
@@ -23,7 +23,7 @@ resource "local_file" "inventory" {
   content = templatefile("inventory.yaml.tftpl", {
     codeserver_ip = digitalocean_droplet.codeserver.ipv4_address
     ssh_private_key = var.ssh_private_key
-    codeserver_domain = "codes=server-${digitalocean_droplet.codeserver.ipv4_address}.nip.io"
+    codeserver_domain = "codes-server-${digitalocean_droplet.codeserver.ipv4_address}.nip.io"
     codeserver_password = var.codeserver_password
   })
   file_permission = "0444"
