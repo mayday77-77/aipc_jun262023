@@ -1,5 +1,6 @@
 #--- #playbooks
-- hosts: all
+- name: Install code server
+  hosts: all
   vars:
     cs_archive: "https://github.com/coder/code-server/releases/download/v4.9.1/code-server-4.9.1-linux-amd64.tar.gz"
     cs_dir: "/usr/local/opt"
@@ -44,23 +45,23 @@
         enabled: true
         state: started
 
-  - name: Install Nginx
-    hosts: all
-    tasks:
-      - name: Install nginx
-        apt:
-          name: nginx
-          state: latest
-      - name: Generate code-serer.conf
-        template:
-          src: code-server.conf.j2
-          dest: /etc/nginx/sites-available/code-server.conf
-      - name: Link code-server.conf to /etc/nginx/sites-enabled
-        file:
-          src: /etc/nginx/sites-available/code-server.conf
-          dest: /etc/nginx/sites-enabled/code-server.conf
-          state: link
-      - name: restart nginx
-        systemd:
-          name: nginx
-          state: restarted
+    - name: Install Nginx
+      hosts: all
+      tasks:
+        - name: Install nginx
+          apt:
+            name: nginx
+            state: latest
+        - name: Generate code-serer.conf
+          template:
+            src: code-server.conf.j2
+            dest: /etc/nginx/sites-available/code-server.conf
+        - name: Link code-server.conf to /etc/nginx/sites-enabled
+          file:
+            src: /etc/nginx/sites-available/code-server.conf
+            dest: /etc/nginx/sites-enabled/code-server.conf
+            state: link
+        - name: restart nginx
+          systemd:
+            name: nginx
+            state: restarted
