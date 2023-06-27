@@ -57,7 +57,7 @@
     apt:
       name: nginx
       state: latest
-  - name: Generate code-serer.conf
+  - name: Generate code-server.conf
     template:
       src: code-server.conf.j2
       dest: /etc/nginx/sites-available/code-server.conf
