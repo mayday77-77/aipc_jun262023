@@ -2,8 +2,12 @@ variable "do_token" {
   sensitive = true
 
 }
-variable "docker_cert_path" {}
-variable "docker_host" {}
+variable "docker_cert_path" {
+  default = "/home/fred/.docker/machine/machines/docker-nginx"
+}
+variable "docker_host" {
+  default = "143.198.195.19"
+}
 variable "app_namespace" {
   default = "my"
 }
