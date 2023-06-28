@@ -2,19 +2,20 @@ source digitalocean codeserver {
   api_token = var.do_token
   image = var.do_image
   size =  var.do_size
+  region = var.do_region
   ssh_username = "root"
   snapshot_name = "codeserver"
 }
 
 build {
-  sources = {
+  sources = [
     "source.digitalocean.codeserver"
-  }
+  ]
 
   provisioner ansible {
-    playbooks_file = "playbooks.yaml"
+    playbook_file = "playbook.yaml"
     ansible_ssh_extra_args = [
-      "-oHostKeyAlgorithms=+ssh-rsa -oPublicAcceptedKeyTypes=+ssh-rsa" ]
+      "-oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedKeyTypes=+ssh-rsa" ]
   }
 
 }
